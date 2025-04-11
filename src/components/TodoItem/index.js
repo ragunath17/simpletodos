@@ -1,38 +1,57 @@
-// Write your code here
-/*
+import {Component} from 'react'
 import './index.css'
 
-const UserTodos = props => {
-  const {todoDetails, deleteTodo} = props
-  const {id, title} = todoDetails
-  const onDelete = () => {
-    deleteTodo(id)
+class TodoItem extends Component {
+  constructor(props) {
+    super(props)
+    const {todo} = this.props
+    this.state = {newTitle: todo.title, isEdit: false}
   }
-  return (
-    <li>
-      <h1 className="title">{title}</h1>
-      <button type="button" className="btn" onClick={onDelete}>
-        Delete
-      </button>
-    </li>
-  )
-}
 
-export default UserTodos
-*/
+  onChangeNewTitle = event => {
+    this.setState({newTitle: event.target.value})
+  }
 
-import './index.css'
+  toggleEdit = () => {
+    this.setState(prevState => ({isEdit: !prevState.isEdit}))
+  }
 
-const TodoItem = props => {
-  const {todo, onDelete} = props
-  return (
-    <li className="todo-item">
-      <p className="title">{todo.title}</p>
-      <button type="button" className="btn" onClick={() => onDelete(todo.id)}>
-        Delete
-      </button>
-    </li>
-  )
+  saveTitle = () => {
+    const {onClickEdit, todo} = this.props
+    const {newTitle} = this.state
+    onClickEdit(todo.id, newTitle)
+    this.toggleEdit()
+  }
+
+  render() {
+    const {todo, onDelete} = this.props
+    const {isEdit, newTitle} = this.state
+    const editOrSaveBtn = isEdit ? 'Save' : 'Edit'
+    const editClassname = isEdit ? 'save-btn' : 'edit-btn'
+    return (
+      <li className="todo-item">
+        <input type="checkbox" />
+        {isEdit ? (
+          <>
+            <input value={newTitle} onChange={this.onChangeNewTitle} />
+          </>
+        ) : (
+          <p className="title">{todo.title}</p>
+        )}
+
+        <button
+          type="button"
+          onClick={this.toggleEdit}
+          className={editClassname}
+        >
+          {editOrSaveBtn}
+        </button>
+        <button type="button" className="btn" onClick={() => onDelete(todo.id)}>
+          Delete
+        </button>
+      </li>
+    )
+  }
 }
 
 export default TodoItem

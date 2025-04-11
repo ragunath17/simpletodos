@@ -29,4 +29,44 @@
   display: flex;
   flex-direction: column;
   border: 0px none;
+  padding-left: 0px;
+}
+
+.title-input-container {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+
+.title-input {
+  height: 40px;
+  width: 80%;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: black;
+  padding-left: 10px;
+}
+
+.number-input {
+  height: 40px;
+  width: 40px;
+  border: 0px none;
+  cursor: pointer;
+  outline: none;
+}
+
+.add-btn {
+  height: 40px;
+  width: 80px;
+  background-color: blue;
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #ffffff;
+  border: 0px none;
+  border-radius: 5px;
 }
